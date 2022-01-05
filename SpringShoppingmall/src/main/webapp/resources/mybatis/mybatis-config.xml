@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  
+  <typeAliases>
+    <typeAlias type="com.shoppingmall.web.account.LoginVO" alias="login" />
+	<typeAlias type="com.shoppingmall.web.account.AccountVO" alias="account" />
+	<typeAlias type="com.shoppingmall.web.item.model.ItemVO" alias="item" />
+  </typeAliases>
+  
+</configuration>

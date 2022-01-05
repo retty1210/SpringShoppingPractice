@@ -1,0 +1,6 @@
+@charset "UTF-8";
+@import 'fontfamily.css';
+
+body {
+	font-family: 'nanumBarunpenB' !important;
+}
