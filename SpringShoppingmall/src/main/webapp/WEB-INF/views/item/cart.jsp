@@ -18,7 +18,7 @@
 	</header>
 	<main role="main">
 		<div>
-			<button type="button" onclick="deleteCart();">장바구니 비우기</button>
+			<button type="button" onclick="deleteCart()">장바구니 비우기</button>
 		</div>
 		<section>
 			<table>
@@ -29,6 +29,7 @@
 				</tr>
 				
 				<c:choose>
+					
 					<c:when test="${datas != null}">
 						<c:forEach var="data" items="${datas }">
 							<tr>

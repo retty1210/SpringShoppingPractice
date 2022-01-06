@@ -17,7 +17,7 @@
 			#{sellername},
 			FROM_TZ(CAST(SYSDATE AS TIMESTAMP), 'GMT') AT TIME ZONE 'ASIA/SEOUL',
 			#{thumURL},
-			#{infoURL},
+			#{thumURL},
 			#{infotext}
 		)
 	</insert>
@@ -36,11 +36,11 @@
 			#{infotext}
 		)
 	</insert>
-	<select id="viewCart" parameterType="list" resultType="item">
+	<select id="viewCart" parameterType="int" resultType="item">
 		SELECT * FROM SHOP_ITEMS 
-		<if test="list != null">
+		<if test="array != null">
 			WHERE ID IN
-			<foreach collection="list" item="n" separator="," open="(" close=")">
+			<foreach collection="array" item="n" separator="," open="(" close=")">
 				#{n}
 			</foreach>
 		</if>
@@ -48,4 +48,38 @@
 	<select id="countAll" resultType="int">
 		SELECT COUNT(*) FROM SHOP_ITEMS;
 	</select>
+	
+	
+	<select id="viewWish" parameterType="account" resultType="wish">
+		SELECT * FROM SHOP_WISHLIST
+		WHERE USERNAME = #{username}
+	</select>
+	<select id="viewWishAccount" parameterType="account" resultType="wish">
+		SELECT * FROM SHOP_WISHLIST
+		<where>
+			<choose>
+				<when test="username != null">
+					USERNAME = #{username}
+				</when>
+				<when test="id != null">
+					USERID = #{id}
+				</when>
+				<otherwise>
+					1 = 1
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	<insert id="makeWish" parameterType="wish">
+		INSERT INTO SHOP_WISHLIST VALUES(
+			SHOP_WISHLIST_SEQ.NEXTVAL,
+			#{userid},
+			#{username},
+			#{wishlist}
+		)
+	</insert>
+	<update id="updateWish" parameterType="wish">
+		UPDATE SHOP_WISHLIST SET
+		WISHLIST = #{wishlist}
+	</update>
 </mapper>

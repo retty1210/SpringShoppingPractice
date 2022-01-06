@@ -11,12 +11,13 @@
 <jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 </head>
 <body>
+	
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_navi.jsp" flush="false" />
 	</header>
 	<main role="main">
 		<section>
-			<form action="./itemup" method="post">
+			<form action="./itemup" method="post" enctype="multipart/form-data">
 				<div>
 					<label for="itemname">물건 이름</label>
 					<input type="text" name="itemname" id="itemname">
@@ -26,9 +27,14 @@
 					<input type="text" name="sellername" id="sellername" value="${sessionScope.account.username}" placeholder="${sessionScope.account.username}" readonly>
 				</div>
 				<div>
+					<label for="thum">썸네일 이미지 업로드</label>
+					<input type="file" name="thum" id="thum">
+				</div>
+				<div>
 					<label for="infotext">제품 설명</label>
 					<textarea name="infotext" id="infotext"></textarea>
 				</div>
+				
 				<div>
 					<button type="submit">업로드</button>
 				</div>

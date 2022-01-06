@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.shoppingmall.web.account.AccountVO;
+
 @Repository
 public class ItemDAO {
 	
@@ -42,5 +44,17 @@ public class ItemDAO {
 		res = this.sess.selectOne("ItemMapper.countAll");
 		return res;
 	}
+	
+	public WishlistVO viewWish(AccountVO vo) {
+		WishlistVO data = this.sess.selectOne("ItemMapper.viewWish", vo);
+		return data;
+	}
+	
+	public boolean makeWish(WishlistVO vo) {
+		int res = this.sess.insert("ItemMapper.makeWish", vo);
+		return res == 1 ? true : false;
+	}
+	
+	
 
 }

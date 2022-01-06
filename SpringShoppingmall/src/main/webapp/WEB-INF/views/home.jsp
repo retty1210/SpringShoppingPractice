@@ -9,10 +9,12 @@
 	<jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 </head>
 <body>
+	
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_navi.jsp" flush="false" />
 	</header>
 	<div>
+	<c:url var="homeURL" value="/" />
 		<h1>
 			Hello world!  
 		</h1>
@@ -31,6 +33,10 @@
 			<li><a href="${loginURL}">로그인</a></li>
 			
 		</ul>
+	</div>
+	<div>
+		<p>이미지 경로 테스트</p>
+		<img src="${homeURL }static/up/pet0026.jpg">
 	</div>
 </body>
 </html>

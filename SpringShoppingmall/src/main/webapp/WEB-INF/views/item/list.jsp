@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>리스트</title>
 <jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
+<c:url var="jscart" value="/static/js/cart.js" />
+<script type="text/javascript" src=${jscart } ></script>
 </head>
 <body>
 	<header>
@@ -23,6 +25,8 @@
 					<td>판매자</td>
 					<td>작성시간</td>
 					<td>썸네일 주소</td>
+					<td>장바구니</td>
+					<td>위시리스트</td>
 				</tr>
 				
 				<c:forEach var="data" items="${datas}">
@@ -38,6 +42,12 @@
 							<c:if test="${data.getThumURL() != null}">
 								<a href="${detailURL}">${data.getThumURL()}</a>
 							</c:if>
+						</td>
+						<td>
+							<button type="button" onclick="addcart(${data.getId()})">장바구니 담기</button>
+						</td>
+						<td>
+							<button type="button" onclick="/wish/add?id=${data.getId()}">위시리스트 담기</button>
 						</td>
 					</tr>
 				</c:forEach>

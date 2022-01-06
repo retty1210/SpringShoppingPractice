@@ -8,6 +8,7 @@
     <typeAlias type="com.shoppingmall.web.account.LoginVO" alias="login" />
 	<typeAlias type="com.shoppingmall.web.account.AccountVO" alias="account" />
 	<typeAlias type="com.shoppingmall.web.item.model.ItemVO" alias="item" />
+	<typeAlias type="com.shoppingmall.web.item.model.WishlistVO" alias="wish" />
   </typeAliases>
   
 </configuration>

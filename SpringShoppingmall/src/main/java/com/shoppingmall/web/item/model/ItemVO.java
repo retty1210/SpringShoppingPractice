@@ -10,6 +10,14 @@ public class ItemVO {
 	private String thumURL;
 	private String infoURL;
 	private String infotext;
+	
+	public ItemVO() {}
+	public ItemVO(String itemname, String sellername, String infotext) {
+		this.itemname = itemname;
+		this.sellername = sellername;
+		this.infotext = infotext;
+	}
+	
 	public int getId() {
 		return id;
 	}

@@ -2,6 +2,7 @@ package com.shoppingmall.web.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AccountService {
@@ -30,6 +31,15 @@ public class AccountService {
 			}
 		}
 		return false;
+	}
+	
+	@Transactional(rollbackFor=Exception.class)
+	public boolean join(AccountVO vo) throws Exception {
+		if(dao.joinBuyerAccount(vo)) {
+			return true;
+		} else {
+			throw new Exception("데이터 처리 과정중 문제 발생");
+		}
 	}
 
 }

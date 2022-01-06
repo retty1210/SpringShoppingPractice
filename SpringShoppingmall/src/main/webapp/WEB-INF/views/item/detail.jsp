@@ -17,13 +17,15 @@
 		<jsp:include page="/WEB-INF/views/module/top_navi.jsp" flush="false" />
 	</header>
 	<main role="main">
+	<c:set var="path" value="${sessionScope.path}" />
+	<c:url var="upURL" value="/static/up/" />
 		<section>
 			<table>
 				<tr>
 					<td rowspan="3">
 						<c:choose>
 							<c:when test="${data.getThumURL() != null}">
-								<img src="${data.getThumURL() }">
+								<img src="${upURL}${data.getThumURL() }" width="300" height="300">
 							</c:when>
 							<c:otherwise>
 								<p>NO IMAGE</p>
@@ -57,7 +59,7 @@
 						<td>제품 상세설명 이미지</td>
 					</tr>
 					<tr>
-						<td><img src="${data.getInfoURL() }"></td>
+						<td><img src="${upURL}${data.getInfoURL() }" width="300" height="300"></td>
 					</tr>
 				</c:if>
 			</table>

@@ -3,6 +3,7 @@ package com.shoppingmall.web.account;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shoppingmall.web.common.CommonTools;
 
@@ -113,5 +115,22 @@ public class AccountController {
 		System.out.println("로그아웃 성공, 메인 페이지로 이동합니다");
 		return "redirect:/";
 	}
+	
+//	@RequestMapping(value="/join/chk-username", method=RequestMethod.POST, produces="application/json; charset=uft-8")
+//	@ResponseBody
+//	public String usernameCheck(String username) {
+//		//중복체크 서비스 동작
+//		boolean res = false;
+//		
+//		JSONObject json = new JSONObject();
+//		if(res) {
+//			json.put("state", "fail");
+//			json.put("msg", "아이디가 중복되었습니다.");
+//		} else {
+//			json.put("state", "success");
+//			
+//		}
+//		return json.toJSONString();
+//	}
 
 }
