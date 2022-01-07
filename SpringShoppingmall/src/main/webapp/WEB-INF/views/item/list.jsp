@@ -47,7 +47,25 @@
 							<button type="button" onclick="addcart(${data.getId()})">장바구니 담기</button>
 						</td>
 						<td>
-							<button type="button" onclick="/wish/add?id=${data.getId()}">위시리스트 담기</button>
+							<button type="button" onclick="addwish(${data.getId()})">위시리스트 담기</button>
+							<script type="text/javascript">
+								function addwish(idnum) {
+									$.ajax({
+										url: "./wish/add",
+										type: "post",
+										data: {
+											id: idnum
+										},
+										dataType: "json",
+										success: function(data) {
+											alert(data.msg);
+										},
+										error: function(data) {
+											alert(data.msg);
+										}
+									});
+								}
+							</script>
 						</td>
 					</tr>
 				</c:forEach>

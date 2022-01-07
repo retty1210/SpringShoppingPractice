@@ -97,6 +97,7 @@ public class AccountController {
 		if(data != null) {
 			System.out.println("로그인 성공, 메인 페이지로 이동합니다");
 			session.setAttribute("logined", true);
+			data.setPassword("");
 			session.setAttribute("account", data);
 			session.setAttribute("usertype", data.getUsertype());
 			return "redirect:/";

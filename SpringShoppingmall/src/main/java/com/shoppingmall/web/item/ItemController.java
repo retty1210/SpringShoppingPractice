@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.shoppingmall.web.account.AccountController;
+import com.shoppingmall.web.account.AccountVO;
 import com.shoppingmall.web.item.model.*;
 
 @Controller
@@ -199,35 +200,38 @@ public class ItemController {
 		}
 	}
 	
-//	@RequestMapping(value="/upload", method = RequestMethod.POST)
-//	public String fileUpload(HttpServletRequest request) throws IOException {
-//		MultipartRequest multi = new MultipartRequest(
-//				request,
-//				request.getServletContext().getRealPath("/upload"),
-//				1024* 1024*10,
-//				"utf-8",
-//				new DefaultFileRenamePolicy()
-//				);
-//		String filename = multi.getFilesystemName("upload");
-//		File file = multi.getFile("upload");
-//		return "redirect:/upload/file";
-//	}
-	
 	@RequestMapping(value="/wish/add", method=RequestMethod.POST, produces="application/json; charset=utf-8")
 	@ResponseBody
-	public String addWish(int id) {
-		boolean res = false;
-		//중복체크
-		
+	public String addWish(HttpSession session, int id) {
+		AccountVO vo = (AccountVO) session.getAttribute("account");
 		JSONObject json = new JSONObject();
+		boolean res = false;
+		if(vo == null) {
+			json.put("msg", "로그인하세요.");
+			return json.toJSONString();
+		}
+		res = service.addWish(vo, id);
+		
 		if(res) {
 			json.put("msg", "위시리스트에 추가했습니다.");
 		} else {
-			json.put("msg", "위시리스트에 이미 있는 상품입니다.");
+			json.put("msg", "에러 - 위시리스트에 이미 있는지 확인해주세요.");
 		}
 		return json.toJSONString();
 	}
 	
+	@RequestMapping(value = "/wishlist", method = RequestMethod.GET)
+	public String wish(HttpServletRequest request, HttpSession session) {
+		AccountVO ac = (AccountVO) session.getAttribute("account");
+		boolean res = service.viewwish(ac);
+		if(res) {
+			List<ItemVO> datas = service.viewWishList(ac);
+			request.setAttribute("datas", datas);
+		}
+		
+		
+		return "item/wish";
+	}
 	
 
 }

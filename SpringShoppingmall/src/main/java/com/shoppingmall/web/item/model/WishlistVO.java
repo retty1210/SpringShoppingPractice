@@ -6,6 +6,15 @@ public class WishlistVO {
 	private int userid;
 	private String username;
 	private String wishlist;
+	
+	public WishlistVO() {}
+	
+	public WishlistVO(int userid, String username, String wishlist) {
+		this.userid = userid;
+		this.username = username;
+		this.wishlist = wishlist;
+	}
+	
 	public int getId() {
 		return id;
 	}

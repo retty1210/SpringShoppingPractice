@@ -81,5 +81,6 @@
 	<update id="updateWish" parameterType="wish">
 		UPDATE SHOP_WISHLIST SET
 		WISHLIST = #{wishlist}
+		WHERE USERNAME = #{username}
 	</update>
 </mapper>
