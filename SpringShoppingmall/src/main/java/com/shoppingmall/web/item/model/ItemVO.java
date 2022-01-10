@@ -10,6 +10,8 @@ public class ItemVO {
 	private String thumURL;
 	private String infoURL;
 	private String infotext;
+	private int price;
+	private int category;
 	
 	public ItemVO() {}
 	public ItemVO(String itemname, String sellername, String infotext) {
@@ -59,6 +61,18 @@ public class ItemVO {
 	}
 	public void setInfotext(String infotext) {
 		this.infotext = infotext;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getCategory() {
+		return category;
+	}
+	public void setCategory(int category) {
+		this.category = category;
 	}
 	
 	

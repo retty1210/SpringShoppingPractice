@@ -12,7 +12,10 @@ public class AccountService {
 	
 	public AccountVO login(LoginVO vo) {
 		AccountVO data = dao.selectLoginAccount(vo);
-		data.setPassword("");
+		if(data != null) {
+			data.setPassword("");
+		}
+		
 		return data;
 	}
 	
@@ -33,13 +36,13 @@ public class AccountService {
 		return false;
 	}
 	
-	@Transactional(rollbackFor=Exception.class)
-	public boolean join(AccountVO vo) throws Exception {
-		if(dao.joinBuyerAccount(vo)) {
-			return true;
-		} else {
-			throw new Exception("데이터 처리 과정중 문제 발생");
-		}
-	}
+//	@Transactional(rollbackFor=Exception.class)
+//	public boolean join(AccountVO vo) throws Exception {
+//		if(dao.joinBuyerAccount(vo)) {
+//			return true;
+//		} else {
+//			throw new Exception("데이터 처리 과정중 문제 발생");
+//		}
+//	}
 
 }

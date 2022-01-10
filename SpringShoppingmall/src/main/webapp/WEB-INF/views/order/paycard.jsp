@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카드 결제가 완료되었습니다.</title>
 <jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 </head>
 <body>
@@ -16,26 +16,13 @@
 	</header>
 	<main role="main">
 		<section>
-			<form action="./login" method="post">
-				<div>
-					<label for="username">아이디</label>
-					<input type="text" name="username" required>
-				</div>
-				<div>
-					<label for="password">비밀번호</label>
-					<input type="password" name="password" required>
-				</div>
-				
-					<div>
-						<p>${error_msg }</p>
-					</div>
-				
-				<div>
-					<button type="submit">로그인</button>
-				</div>
-			</form>
+			<h5>${sessionScope.account.username } 님의 주문이 완료되었습니다.</h5>
+			<p>주문번호 ${orderno } 번 주문이 정상적으로 완료되었습니다.</p><br>
+			<ul>
+				<li><a href="${orderURL }">주문 목록으로 가기</a></li>
+				<li><a href="${homeURL }">메인 페이지로 가기</a>
+			</ul>
 		</section>
-		
 	</main>
 </body>
 </html>

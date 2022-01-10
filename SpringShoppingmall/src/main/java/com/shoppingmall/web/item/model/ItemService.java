@@ -1,21 +1,21 @@
 package com.shoppingmall.web.item.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.shoppingmall.web.account.AccountVO;
+import com.shoppingmall.web.common.CommonTools;
 
 @Service
 public class ItemService {
 
 	@Autowired
 	private ItemDAO dao;
+	private CommonTools ct;
 	
 	public boolean upload(ItemVO vo) {
 		boolean res = false;
@@ -51,17 +51,12 @@ public class ItemService {
 			return dao.makeWish(res);
 		} else {
 			String result = "";
-			int[] ilist = dao.makeIntList(data);
-			boolean isDup = false;
-			for(int i : ilist) {
-				if(i == id) {
-					isDup = true;
-				}
-			}
+			int[] ilist = ct.makeIntList(data.getWishlist());
+			boolean isDup = ct.isDuplicate(ilist, id);
 			
 			if(!isDup) {
-				int[] newlist = dao.plusIntList(ilist, id);
-				result = Arrays.stream(newlist).mapToObj(String::valueOf).collect(Collectors.joining("_"));
+				int[] newlist = ct.plusIntList(ilist, id);
+				result = ct.intArrToString(newlist, "_");
 				data.setWishlist(result);
 				return dao.updateWish(data);
 			}
@@ -71,13 +66,18 @@ public class ItemService {
 	}
 	
 	public List<ItemVO> viewWishList(AccountVO vo) {
+		System.out.println("service.viewwishlist 진입");
 		WishlistVO data = dao.viewWish(vo);
-		int[] ilist = dao.makeIntList(data);
-		Arrays.sort(ilist);
-		for(int i : ilist) {
-			System.out.println("ilist: " + i);
-		}
+		System.out.println("wishlistVO 생성");
+		int[] ilist = new int[1];
+		System.out.println("int[] 생성");
+		String ws = data.getWishlist();
+		System.out.println("data.getWishlist() : " + ws);
+		ilist = ct.makeIntList(ws);
+		System.out.println("int[]에 data값 읽어옴");
+		//Arrays.sort(ilist);
 		List<ItemVO> datas = dao.viewCart(ilist);
+		System.out.println("ItemVO list 만듬");
 		return datas;
 	}
 	
@@ -85,6 +85,14 @@ public class ItemService {
 		WishlistVO data = dao.viewWish(vo);
 	
 		return data != null ? true : false;
+	}
+	
+	public int itemAllPrice(List<ItemVO> datas) {
+		int res = 0;
+		for(ItemVO d : datas) {
+			res += d.getPrice();
+		}
+		return res;
 	}
 
 }

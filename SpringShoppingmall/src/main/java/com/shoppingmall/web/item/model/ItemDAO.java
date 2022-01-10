@@ -1,6 +1,5 @@
 package com.shoppingmall.web.item.model;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -60,35 +59,7 @@ public class ItemDAO {
 		int res = this.sess.update("ItemMapper.updateWish", vo);
 		return res == 1 ? true : false;
 	}
-	
-	public int[] makeIntList(WishlistVO vo) {
-		String[] slist = new String[1];
-		if(!vo.getWishlist().isEmpty()) {
-			if(vo.getWishlist().contains("_")) {
-				slist = vo.getWishlist().split("_");
-			} else {
-				slist[0] = vo.getWishlist();
-			}
-		} 
-		
-		int leng = slist.length;
-		int[] ilist = new int[leng];
-		for(int i = 0; i < leng; i++) {
-			String s = slist[i];
-			ilist[i] = Integer.parseInt(s);
-		}
-		return ilist;
-	}
-	
-	public int[] plusIntList(int[] list, int id) {
-		int len = list.length;
-		int[] newlist = new int[len + 1];
-		for(int i = 0; i < len ; i++) {
-			newlist[i] = list[i];
-		}
-		newlist[len] = id;
-		return newlist;
-	}
+
 	
 	
 

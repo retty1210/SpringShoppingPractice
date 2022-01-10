@@ -34,6 +34,19 @@
 					<label for="infotext">제품 설명</label>
 					<textarea name="infotext" id="infotext"></textarea>
 				</div>
+				<div>
+					<label for="price">가격</label>
+					<input type="number" name="price" id="price">
+				</div>
+				<div>
+					<label for="category">카테고리</label>
+					<select name="category" id="category">
+						<option value="" disabled>카테고리를 선택하세요.</option>
+						<option value="1">카테고리1</option>
+						<option value="2">카테고리2</option>
+						<option value="3">카테고리3</option>
+					</select>
+				</div>
 				
 				<div>
 					<button type="submit">업로드</button>

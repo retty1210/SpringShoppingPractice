@@ -25,6 +25,8 @@
 					<td>판매자</td>
 					<td>작성시간</td>
 					<td>썸네일 주소</td>
+					<td>가격</td>
+					<td>카테고리</td>
 					<td>장바구니</td>
 					<td>위시리스트</td>
 				</tr>
@@ -43,6 +45,8 @@
 								<a href="${detailURL}">${data.getThumURL()}</a>
 							</c:if>
 						</td>
+						<td>${data.getPrice() }</td>
+						<td>${data.getCategory() }</td>
 						<td>
 							<button type="button" onclick="addcart(${data.getId()})">장바구니 담기</button>
 						</td>

@@ -93,12 +93,14 @@ public class AccountController {
 	public String login(@ModelAttribute("account") LoginVO loginVo, HttpSession session, Model model) {
 		System.out.println("username: " + loginVo.getUsername());
 		System.out.println("password: " + loginVo.getPassword());
-		AccountVO data = service.login(loginVo);
-		if(data != null) {
+		
+		if(service.login(loginVo) != null) {
+			AccountVO data = service.login(loginVo);
 			System.out.println("로그인 성공, 메인 페이지로 이동합니다");
 			session.setAttribute("logined", true);
 			data.setPassword("");
 			session.setAttribute("account", data);
+			session.setAttribute("username", data.getUsername());
 			session.setAttribute("usertype", data.getUsertype());
 			return "redirect:/";
 		} else {

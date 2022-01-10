@@ -189,6 +189,11 @@ public class ItemController {
 			System.out.println("listN = " + listN);
 			
 			List<ItemVO> datas = service.viewCart(list);
+			String res = "";
+			for(int i: list) {
+				res += i + "_";
+			}
+			request.setAttribute("res", res);
 			
 			System.out.println("datas: " + datas);
 			for(ItemVO d : datas) {
@@ -196,6 +201,8 @@ public class ItemController {
 				System.out.println("이름: " + d.getItemname());
 			}
 			request.setAttribute("datas", datas);
+			int pr = service.itemAllPrice(datas);
+			request.setAttribute("priceAll", pr);
 			return "item/cart";
 		}
 	}
@@ -222,11 +229,14 @@ public class ItemController {
 	
 	@RequestMapping(value = "/wishlist", method = RequestMethod.GET)
 	public String wish(HttpServletRequest request, HttpSession session) {
-		AccountVO ac = (AccountVO) session.getAttribute("account");
+		AccountVO ac = new AccountVO();
+		ac.setUsername(session.getAttribute("username").toString());
 		boolean res = service.viewwish(ac);
 		if(res) {
 			List<ItemVO> datas = service.viewWishList(ac);
+			int pr = service.itemAllPrice(datas);
 			request.setAttribute("datas", datas);
+			request.setAttribute("priceAll", pr);
 		}
 		
 		

@@ -22,7 +22,7 @@
 		<section>
 			<table>
 				<tr>
-					<td rowspan="3">
+					<td rowspan="4">
 						<c:choose>
 							<c:when test="${data.getThumURL() != null}">
 								<img src="${upURL}${data.getThumURL() }" width="300" height="300">
@@ -38,6 +38,10 @@
 				<tr>
 					<td>판매자</td>
 					<td>${data.getSellername() }</td>
+				</tr>
+				<tr>
+					<td>가격</td>
+					<td>${data.getPrice() }</td>
 				</tr>
 				<tr>
 					<td>작성시간</td>

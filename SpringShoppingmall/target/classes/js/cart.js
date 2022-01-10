@@ -46,7 +46,7 @@ function addcart(id) {
 		item = itemArray.join('_');
 	}
 
-	document.cookie = "cart=" + item + "; path=/shop; expires=" + date;
+	document.cookie = "cart=" + item + "; path=/; expires=" + date;
 	//쿠키에서 카트 내용물이 2개 이상일때 못 읽었던 이유: 
 	// 구분자를 , 으로 했었는데 이게 ; 랑 똑같은 역할을 해버림
 	

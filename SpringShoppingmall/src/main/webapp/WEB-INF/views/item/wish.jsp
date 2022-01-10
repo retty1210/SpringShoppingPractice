@@ -22,6 +22,7 @@
 					<td>제품명</td>
 					<td>판매자</td>
 					<td>작성시간</td>
+					<td>가격</td>
 					<td>썸네일 주소</td>
 					
 				</tr>
@@ -36,6 +37,7 @@
 								<td>
 								<fmt:formatDate value="${data.getUploadtime() }" type="both" pattern="YY/MM/dd(E) a hh:mm"/>
 								</td>
+								<td>${data.getPrice() }</td>
 								<td>
 									<c:if test="${data.getThumURL() != null}">
 										<a href="${detailURL}">${data.getThumURL()}</a>
@@ -43,6 +45,10 @@
 								</td>
 							</tr>
 						</c:forEach>
+							<tr>
+								<td colspan="4">총 가격 합계</td>
+								<td>${priceAll }</td>
+							</tr>
 					</c:when>
 					<c:otherwise>
 						<tr>

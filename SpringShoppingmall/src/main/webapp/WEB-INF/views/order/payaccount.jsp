@@ -16,26 +16,25 @@
 	</header>
 	<main role="main">
 		<section>
-			<form action="./login" method="post">
-				<div>
-					<label for="username">아이디</label>
-					<input type="text" name="username" required>
-				</div>
-				<div>
-					<label for="password">비밀번호</label>
-					<input type="password" name="password" required>
-				</div>
-				
-					<div>
-						<p>${error_msg }</p>
-					</div>
-				
-				<div>
-					<button type="submit">로그인</button>
-				</div>
-			</form>
+			<h5>무통장입금 주문완료</h5>
+			<p>아래 계좌로 입금완료하시면 결제가 완료됩니다.</p><br>
+			<p>입금확인은 매일 오후 4~5시 사이에 수동으로 이루어집니다.</p></br>
+			<p>예금주: ㅇㅇㅇ</p><br>
+			<table>
+				<tr>
+					<td>기업은행</td>
+					<td>000-000000-0000-00</td>
+				</tr>
+				<tr>
+					<td>농협</td>
+					<td>0000-000000-000-00</td>
+				</tr>
+				<tr>
+					<td>국민은행</td>
+					<td>000-000000-000-000</td>
+				</tr>
+			</table>
 		</section>
-		
 	</main>
 </body>
 </html>
