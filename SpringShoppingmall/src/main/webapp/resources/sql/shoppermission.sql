@@ -1,0 +1,80 @@
+CREATE TABLE SHOP_PERMISSION (
+    ID NUMBER,
+    USERTYPE VARCHAR2(6 CHAR),
+    TABLENAME VARCHAR2(25 CHAR),
+    INSERTPM VARCHAR2(3 CHAR),
+    UPDATEPM VARCHAR2(3 CHAR),
+    DELETEPM VARCHAR2(3 CHAR)
+);
+
+CREATE SEQUENCE SHOP_PERMISSION_SEQ NOCACHE;
+
+SELECT * FROM SHOP_PERMISSION;
+
+INSERT INTO SHOP_PERMISSION VALUES(
+    SHOP_PERMISSION_SEQ.NEXTVAL,
+    'ADMIN',
+    'SHOP_ORDER',
+    'N',
+    'Y',
+    'Y'
+);
+/* ADMIN
+'SHOP_ITEMS',
+    'N',
+    'N',
+    'Y'
+'SHOP_WISHLIST',
+    'N',
+    'N',
+    'Y'
+'SHOP_ORDER',
+    'N',
+    'Y',
+    'Y'
+*/
+
+INSERT INTO SHOP_PERMISSION VALUES(
+    SHOP_PERMISSION_SEQ.NEXTVAL,
+    'SELLER',
+    'SHOP_ORDER',
+    'N',
+    'Y',
+    'N'
+);
+/* SELLER
+'SHOP_ITEMS',
+    'Y',
+    'Y',
+    'Y'
+'SHOP_WISHLIST',
+    'N',
+    'N',
+    'N'
+'SHOP_ORDER',
+    'N',
+    'Y',
+    'N'
+*/
+INSERT INTO SHOP_PERMISSION VALUES(
+    SHOP_PERMISSION_SEQ.NEXTVAL,
+    'BUYER',
+    'SHOP_ORDER',
+    'Y',
+    'N',
+    'N'
+);
+/* BUYER
+'SHOP_ITEMS',
+    'N',
+    'N',
+    'N'
+'SHOP_WISHLIST',
+    'Y',
+    'Y',
+    'Y'
+'SHOP_ORDER',
+    'Y',
+    'N',
+    'N'
+*/

@@ -31,10 +31,49 @@ public class OrderController {
 		int res = service.getPriceAll(datas);
 		session.setAttribute("priceAll", res);
 		if(res >= 30000) {
-			vo.setPrice(res);
+			session.setAttribute("payPrice", res);
 		} else {
-			vo.setPrice(res + 3000);
+			res += 3000;
+			session.setAttribute("payPrice", res);
 		}
 		return "order/buy";
+	}
+	
+	@RequestMapping(value="/payment", method = RequestMethod.POST)
+	public String payment(OrderVO vo, HttpSession session) {
+		String paym = vo.getPaymethod();
+		if(paym.equals("bank")) {
+			vo.setOrderstate(1);
+			boolean res = service.insertOrder(vo);
+			if(res) {
+				String no = service.orderNo(vo);
+				session.setAttribute("orderno", no);
+				return "order/payaccount";
+			} else {
+				session.setAttribute("error_msg", "주문과정에서 서버에 오류가 발생했습니다.");
+				return "order/fail";
+			}
+		} else if(paym.equals("card")) {
+			boolean payres = service.paycheck(vo);
+			if(payres) {
+				vo.setOrderstate(2);
+				boolean res = service.insertOrder(vo);
+				if(res) {
+					String no = service.orderNo(vo);
+					session.setAttribute("orderno", no);
+					return "order/paycard";
+				} else {
+					session.setAttribute("error_msg", "주문과정에서 서버에 오류가 발생했습니다.");
+					return "order/fail";
+				}
+			} else {
+				session.setAttribute("error_msg", "결제가 실패했습니다.");
+				return "order/fail";
+			}
+			
+		} else {
+			session.setAttribute("error_msg", "결제수단 선택 과정에서 오류가 발생했습니다.");
+			return "order/fail";
+		}
 	}
 }

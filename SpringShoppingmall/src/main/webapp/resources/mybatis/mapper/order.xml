@@ -3,5 +3,72 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderMapper">
-
+	<insert id="makeOrder" parameterType="order">
+		INSERT INTO SHOP_ORDER(
+		    ID,
+		    ORDERLIST,
+			<if test="buyername != null">
+				BUYERNAME,
+			</if>
+		    PACKAGENAME,
+		    ADDRESS,
+		    POSTNUMBER,
+		    PHONENUMBER,
+		    PAYMETHOD,
+		    PRICE,
+		    ORDERNO,
+			ORDERSTATE
+		) VALUES (
+		    SHOP_ORDER_SEQ.NEXTVAL,
+		    #{orderlist},
+			<if test="buyername != null">
+				#{buyername},
+			</if>
+		    #{packagename},
+		    #{address},
+		    #{postnumber},
+		    #{phonenumber},
+		    #{paymethod},
+		    #{price},
+		    CONCAT(
+		        TO_CHAR(FROM_TZ(CAST(SYSDATE AS TIMESTAMP), 'GMT') AT TIME ZONE 'ASIA/SEOUL','YYMMDDHH24MISS'), 
+		        DBMS_RANDOM.STRING('X', 13)
+			),
+			#{orderstate}
+		)
+	</insert>
+	
+	<select id="selectOrder" parameterType="order" resultType="order">
+		SELECT * FROM SHOP_ORDER
+		<where>
+			<if test="id != null">
+				ID = #{id},
+			</if>
+			<if test="orderno != null">
+				ORDERNO = #{orderno}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectOrderstats" resultType="orderstat">
+		SELECT * FROM SHOP_ORDERSTAT ORDER BY ID;
+	</select>
+	
+	<select id="selectOrderstat" parameterType="order" resultType="orderstat">
+		SELECT * FROM SHOP_ORDERSTAT
+		<where>
+			<if test="id != null">
+				ID = #{id},
+			</if>
+			<if test="orderst != null">
+				ORDERST = #{orderst}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateOrderstat" parameterType="order">
+		UPDATE SHOP_ORDER SET
+			ORDERSTATE = #{orderstate}
+			WHERE ID = #{id}
+	</update>
 </mapper>

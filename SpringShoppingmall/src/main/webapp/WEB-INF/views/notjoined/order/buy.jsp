@@ -78,7 +78,7 @@
 						</tr>
 						<tr>
 							<td colspan="3"> 총 금액: </td>
-							<td>${priceAll} 원</td>
+							<td>${payPrice} 원</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -88,7 +88,7 @@
 						</tr>
 						<tr>
 							<td colspan="3"> 총 금액: </td>
-							<td>${priceAll + 3000} 원</td>
+							<td>${payPrice} 원</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
@@ -105,8 +105,8 @@
 					<div>
 						<p>주문자 정보 입력</p>
 						<div>
-							<input type="text" name="name" id="name">
-							<label for="name">이름</label>
+							<input type="text" name="packagename" id="packagename">
+							<label for="packagename">이름</label>
 						</div>
 						<div>
 							<input type="text" name="address" id="address">
@@ -126,14 +126,14 @@
 						<label><input type="checkbox" name="rulecheck" id="rulecheck" value="rulecheck">정보통신법.....구매에 동의하십니까?</label>
 					</div>
 					<div>
-						<input type="radio" id="payaccount" name="paymethod" value="payaccount">
-						<label for="payaccount">계좌이체</label>
-						<input type="radio" id="paycard" name="paymethod" value="paycard">
-						<label for="paycard">카드결제</label>
+						<input type="radio" id="bank" name="paymethod" value="bank">
+						<label for="bank">계좌이체</label>
+						<input type="radio" id="paycard" name="paymethod" value="card">
+						<label for="card">카드결제</label>
 					</div>
 					<div>
 						<input type="hidden" name="orderlist" value="${res }">
-						
+						<input type="hidden" name="price" value="${payPrice}">
 					</div>
 					<div>
 						<button type="submit">결제하기</button>

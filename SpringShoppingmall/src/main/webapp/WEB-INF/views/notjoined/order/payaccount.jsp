@@ -17,7 +17,7 @@
 	<main role="main">
 		<section>
 			<h5>무통장입금 주문완료</h5>
-			<p>${sessionScope.account.username } 님의 주문번호 ${orderno}의 주문이 완료되었습니다.</p><br>
+			<p>주문번호 ${orderno}의 주문이 완료되었습니다.</p><br>
 			<p>아래 계좌로 입금완료하시면 결제가 완료됩니다.</p><br>
 			<p>입금확인은 매일 오후 4~5시 사이에 수동으로 이루어집니다.</p><br>
 			<p>예금주: ㅇㅇㅇ</p><br>

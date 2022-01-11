@@ -10,6 +10,7 @@
 	<typeAlias type="com.shoppingmall.web.item.model.ItemVO" alias="item" />
 	<typeAlias type="com.shoppingmall.web.item.model.WishlistVO" alias="wish" />
 	<typeAlias type="com.shoppingmall.web.order.model.OrderVO" alias="order" />
+	<typeAlias type="com.shoppingmall.web.order.model.OrderstatVO" alias="orderstat" />
   </typeAliases>
   
 </configuration>

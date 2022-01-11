@@ -13,6 +13,7 @@ public class AccountVO {
 	private int postnumber;
 	private int phonenumber;
 	private Date birthday;
+	private String packagename;
 	
 	public int getId() {
 		return id;
@@ -73,6 +74,12 @@ public class AccountVO {
 		return "AccountVO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
 				+ ", usertype=" + usertype + ", address=" + address + ", postnumber=" + postnumber + ", phonenumber="
 				+ phonenumber + ", birthday=" + birthday + "]";
+	}
+	public String getPackagename() {
+		return packagename;
+	}
+	public void setPackagename(String packagename) {
+		this.packagename = packagename;
 	}
 	
 	

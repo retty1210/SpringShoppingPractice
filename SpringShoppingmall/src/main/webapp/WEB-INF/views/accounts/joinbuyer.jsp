@@ -81,6 +81,10 @@
 						
 					</div>
 					<div>
+						<label for="packagename">이름(실명)</label>
+						<input type="text" name="packagename">
+					</div>
+					<div>
 						<label for="password">비밀번호</label>
 						<input type="password" name="password" required>
 					</div>

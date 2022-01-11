@@ -31,6 +31,11 @@ orderno: 주문번호(비회원의 경우 이 값으로 주문목록에 접속�
 orderstate: 주문상태
 packageno: 송장번호
 	 */
+	public OrderVO() {}
+	
+	public OrderVO(int id) {
+		this.id = id;
+	}
 	
 	public int getId() {
 		return id;

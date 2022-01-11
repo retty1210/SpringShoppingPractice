@@ -38,17 +38,17 @@
 						</tr>
 						<tr>
 							<td colspan="3"> 총 금액: </td>
-							<td>${priceAll} 원</td>
+							<td>${payPrice} 원</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="3"> 배송비 </td>
+							<td colspan="3"> 배송비(3만원 이상 구매시 무료) </td>
 							<td>3000 원</td>
 						</tr>
 						<tr>
 							<td colspan="3"> 총 금액: </td>
-							<td>${priceAll + 3000} 원</td>
+							<td>${payPrice} 원</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
@@ -62,7 +62,7 @@
 				<table>
 					<tr>
 						<td>이름</td>
-						<td>${account.getName() }</td>
+						<td>${account.getPackagename() }</td>
 					</tr>
 					<tr>
 						<td>주소</td>
@@ -84,14 +84,16 @@
 						<label><input type="checkbox" name="rulecheck" id="rulecheck" value="rulecheck">정보통신법.....구매에 동의하십니까?</label>
 					</div>
 					<div>
-						<input type="radio" id="payaccount" name="paymethod" value="payaccount">
-						<label for="payaccount">계좌이체</label>
-						<input type="radio" id="paycard" name="paymethod" value="paycard">
-						<label for="paycard">카드결제</label>
+						<input type="radio" id="bank" name="paymethod" value="bank">
+						<label for="bank">계좌이체</label>
+						<input type="radio" id="card" name="paymethod" value="card">
+						<label for="card">카드결제</label>
 					</div>
 					<div>
 						<input type="hidden" name="orderlist" value="${res }">
-						<input type="hidden" name="name" value="${account.getName()}">
+						<input type="hidden" name="price" value="${payPrice}">
+						<input type="hidden" name="buyername" value="${account.getName()}">
+						<input type="hidden" name="packagename" value="${account.getPackagename()}">
 						<input type="hidden" name="address" value="${account.getAddress()}">
 						<input type="hidden" name="postnumber" value="${account.getPostnumber()}">
 						<input type="hidden" name="phonenumber" value="${account.getPhonenumber()}">
