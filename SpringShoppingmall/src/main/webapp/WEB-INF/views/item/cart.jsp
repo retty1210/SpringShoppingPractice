@@ -53,6 +53,11 @@
 				<div>
 					<form action="./buy" method="post">
 						<input type="hidden" name="orderlist" id="orderlist" value="${res }">
+						<input type="hidden" name="buyername" id="buyername" value="${sessionScope.account.username }">
+						<input type="hidden" name="packagename" id="packagename" value="${sessionScope.account.packagename }">
+						<input type="hidden" name="address" id="address" value="${sessionScope.account.address }">
+						<input type="hidden" name="postnumber" id="postnumber" value="${sessionScope.account.postnumber }">
+						<input type="hidden" name="phonenumber" id="phonenumber" value="${sessionScope.account.phonenumber }">
 						<button type="submit">결제하기</button>
 					</form>
 				</div>

@@ -4,7 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AccountMapper">
 	<select id="selectLoginAccount" parameterType="login" resultType="account">
-		SELECT * FROM SHOP_ACCOUNTS
+		SELECT 
+			ID
+		    , USERNAME
+		    , PASSWORD
+		    , EMAIL
+		    , USERTYPE
+		    , ADDRESS
+		    , LPAD(POSTNUMBER, 5,'0') AS POSTNUMBER
+		    , LPAD(PHONENUMBER, 10, '0') AS PHONENUMBER
+		    , BIRTHDAY
+			, PACKAGENAME
+		FROM SHOP_ACCOUNTS
 		WHERE USERNAME = #{username}
 			AND PASSWORD = #{password}
 	</select>
@@ -39,17 +50,56 @@
 			#{address},
 			#{postnumber},
 			#{phonenumber},
-			#{birthday}
+			#{birthday},
+			#{packagename}
 		)
 	</insert>
 	
 	<select id="checkUsername" parameterType="account" resultType="account">
-		SELECT * FROM SHOP_ACCOUNTS
+		SELECT 
+			ID
+		    , USERNAME
+		    , PASSWORD
+		    , EMAIL
+		    , USERTYPE
+		    , ADDRESS
+		    , LPAD(POSTNUMBER, 5,'0') AS POSTNUMBER
+		    , LPAD(PHONENUMBER, 10, '0') AS PHONENUMBER
+		    , BIRTHDAY
+			, PACKAGENAME
+		FROM SHOP_ACCOUNTS
 		WHERE USERNAME = #{username}
 	</select>
 	
+	<select id="checkUsernameString" parameterType="String" resultType="account">
+		SELECT 
+			ID
+		    , USERNAME
+		    , PASSWORD
+		    , EMAIL
+		    , USERTYPE
+		    , ADDRESS
+		    , LPAD(POSTNUMBER, 5,'0') AS POSTNUMBER
+		    , LPAD(PHONENUMBER, 10, '0') AS PHONENUMBER
+		    , BIRTHDAY
+			, PACKAGENAME
+		FROM SHOP_ACCOUNTS
+		WHERE USERNAME = '${value}'
+	</select>
+	
 	<select id="checkEmail" parameterType="account" resultType="account">
-		SELECT * FROM SHOP_ACCOUNTS
+		SELECT 
+			ID
+		    , USERNAME
+		    , PASSWORD
+		    , EMAIL
+		    , USERTYPE
+		    , ADDRESS
+		    , LPAD(POSTNUMBER, 5,'0') AS POSTNUMBER
+		    , LPAD(PHONENUMBER, 10, '0') AS PHONENUMBER
+		    , BIRTHDAY 
+			, PACKAGENAME
+		FROM SHOP_ACCOUNTS
 		WHERE EMAIL= #{email}
 	</select>
 

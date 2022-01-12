@@ -35,7 +35,7 @@
 		                로그아웃
 		              </a>
 		            </li>
-		            <c:if test="${sessionScope.usertype == 'buyer'}" ><p>buyer</p></c:if>
+		            
 		            <li>
 		              <c:url var="wishlistURL" value="/wishlist" />
 		              <a href="${wishlistURL }" class="nav-link text-white">

@@ -11,6 +11,8 @@
 	<typeAlias type="com.shoppingmall.web.item.model.WishlistVO" alias="wish" />
 	<typeAlias type="com.shoppingmall.web.order.model.OrderVO" alias="order" />
 	<typeAlias type="com.shoppingmall.web.order.model.OrderstatVO" alias="orderstat" />
+	<typeAlias type="com.shoppingmall.web.order.model.OrderSellerVO" alias="orderseller" />
+	<typeAlias type="com.shoppingmall.web.permission.model.PermissionVO" alias="permission" />
   </typeAliases>
   
 </configuration>

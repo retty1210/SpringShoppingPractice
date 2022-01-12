@@ -36,6 +36,7 @@
 			#{infotext}
 		)
 	</insert>
+	
 	<select id="viewCart" parameterType="int" resultType="item">
 		SELECT * FROM SHOP_ITEMS 
 		<if test="array != null">
@@ -45,6 +46,7 @@
 			</foreach>
 		</if>
 	</select>
+	
 	<select id="countAll" resultType="int">
 		SELECT COUNT(*) FROM SHOP_ITEMS;
 	</select>
@@ -83,4 +85,8 @@
 		WISHLIST = #{wishlist}
 		WHERE USERNAME = #{username}
 	</update>
+	
+	<select id="selectSellerItemlist" parameterType="String" resultType="item">
+		SELECT * FROM SHOP_ITEMS WHERE SELLERNAME = '${value}'
+	</select>
 </mapper>

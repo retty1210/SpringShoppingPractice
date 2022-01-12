@@ -1,9 +1,18 @@
 package com.shoppingmall.web.common;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.shoppingmall.web.item.model.ItemVO;
 
 public class CommonTools {
 	
@@ -91,5 +100,50 @@ public class CommonTools {
 		String result = Arrays.stream(list).mapToObj(String::valueOf).collect(Collectors.joining(s));
 		return result;
 	}
-
+	
+	public static List<String> stringArrDup(List<String> arr) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for(String k : arr) {
+			map.put(k, map.getOrDefault(k, 0) + 1);
+		}
+		List<String> newarr = new ArrayList<String>();
+		for(String key : map.keySet()) {
+			newarr.add(key);
+		}
+		return newarr;
+	}
+	
+	public static int[] checkIntarr(int[] aarr, int[] barr) {
+		List<Integer> intlist = new ArrayList<Integer>();
+		for(int a: aarr) {
+			for(int b: barr) {
+				if(a == b) {
+					intlist.add(a);
+				}
+			}
+		}
+		int[] result = intlist.stream().mapToInt(Integer::intValue).toArray();
+		return result;
+	}
+	
+	public static String generateOrderno() {
+		int leftlimit = 48;
+		int rightlimit = 90;
+		int targetlength = 13;
+		Random random = new Random();
+		
+		String rand = random.ints(leftlimit, rightlimit + 1)
+				.filter(i -> (i <= 57 || i >= 65))
+				.limit(targetlength)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				.toString();
+		
+		DateFormat dfm = new SimpleDateFormat("YYMMDDHH24mmss");
+		Date date = new Date();
+		String dateTostr = dfm.format(date);
+		String res = dateTostr + rand;
+		
+		return res;
+	}
+	
 }

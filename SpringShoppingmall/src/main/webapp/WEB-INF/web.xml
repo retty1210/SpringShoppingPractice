@@ -46,5 +46,22 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>org.springframework.dao.PermissionDeniedDataAccessException</exception-type>
+		<location>/WEB-INF/views/error/permission_denied.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/WEB-INF/views/error/nullpointer.jsp</location>
+	</error-page>
 
 </web-app>

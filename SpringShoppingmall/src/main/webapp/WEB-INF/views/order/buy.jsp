@@ -47,7 +47,7 @@
 							<td>3000 원</td>
 						</tr>
 						<tr>
-							<td colspan="3"> 총 금액: </td>
+							<td colspan="3"> 총 금액: ${priceAll } + 3000원 = </td>
 							<td>${payPrice} 원</td>
 						</tr>
 					</c:otherwise>
@@ -59,27 +59,26 @@
 		<section>
 			<div>
 				<p>주문자 정보 확인</p>
-				<table>
-					<tr>
-						<td>이름</td>
-						<td>${account.getPackagename() }</td>
-					</tr>
-					<tr>
-						<td>주소</td>
-						<td>${account.getAddress() }</td>
-					</tr>
-					<tr>
-						<td>우편번호</td>
-						<td>${account.getPostnumber() }</td>
-					</tr>
-					<tr>
-						<td>전화번호</td>
-						<td>${account.getPhonenumber() }</td>
-					</tr>
-				</table>
-			</div>
-			<div>
 				<form action="./payment" method="post">
+					<table>
+						<tr>
+							<td>이름</td>
+							<td><input type="text" name="packagename" value="${sessionScope.ordervo.getPackagename()}" readonly></td>
+						</tr>
+						<tr>
+							<td>주소</td>
+							<td><input type="text" name="address" value="${sessionScope.ordervo.getAddress()}" readonly></td>
+						</tr>
+						<tr>
+							<td>우편번호</td>
+							<td><input type="text" name="postnumber" value="${sessionScope.ordervo.getPostnumber()}" readonly></td>
+						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td><input type="text" name="phonenumber" value="${sessionScope.ordervo.getPhonenumber()}" readonly></td>
+						</tr>
+					</table>
+				
 					<div>
 						<label><input type="checkbox" name="rulecheck" id="rulecheck" value="rulecheck">정보통신법.....구매에 동의하십니까?</label>
 					</div>
@@ -90,13 +89,13 @@
 						<label for="card">카드결제</label>
 					</div>
 					<div>
-						<input type="hidden" name="orderlist" value="${res }">
+						<input type="hidden" name="orderlist" value="${sessionScope.ordervo.getOrderlist()}">
 						<input type="hidden" name="price" value="${payPrice}">
-						<input type="hidden" name="buyername" value="${account.getName()}">
-						<input type="hidden" name="packagename" value="${account.getPackagename()}">
-						<input type="hidden" name="address" value="${account.getAddress()}">
-						<input type="hidden" name="postnumber" value="${account.getPostnumber()}">
-						<input type="hidden" name="phonenumber" value="${account.getPhonenumber()}">
+						<input type="hidden" name="buyername" value="${sessionScope.ordervo.getBuyername()}">
+						
+						
+						
+						
 					</div>
 					<div>
 						<button type="submit">결제하기</button>

@@ -12,6 +12,11 @@ http://localhost/login?next=/info ->로그인에 성공하면 /info로 URL주소
 판매자 여러명이 공동창고를 쓰는거임..(...ㅋㅋㅋㅋㅋ현실성이 없는듯 있다 왜냐면 창고 관련 비용이 제법 비싸..다고 들음...ㅋㅋㅋ하긴 그 넓은 규모에 월세만 해도)그래서 여러 판매자한테 물건을 사도 택배가 하나로 합쳐져서 오는거지 박스도 아끼고 환경보호???ㅋㅋㅋㅋ아 좀 궤변같아ㅠㅠ
 220111추가) 기성제품이 아니라 핸드메이드제품 공동창고인거임 그래서 1item 1sell 체제로..수량이없는....ㅋㅋㅋㅋㅋ핸드메이드면 생산량이 작아서 공동창고도 할만함 아무튼 그럼ㄹㅇㅋㅋ
 
+220112 제작완료한것)order오류잡고 작동 테스트, sellerorder table 관련기능
+220113 할것)장바구니 쿠키 지우기, seller order list띄우기, buyer order list 띄우기
+시간남으면 할것)회원등급별 topnavi 리스트 조정, 비회원 주문목록 search기능, itemlist interceptor
+
+
 결제시스템
 //1. 장바구니에 물건을 담음
 //2. 장바구니에서 결제 버튼을 누름
@@ -22,9 +27,14 @@ http://localhost/login?next=/info ->로그인에 성공하면 /info로 URL주소
      결제수단이 카드일 경우)카드 결제 시스템 작동해서 성공하면 true, 실패하면 false. 난 이거 없으니까 그냥 ^0^넘어감//
 5. 카드 true)결제완료 페이지로 넘어감. //
 
+* order들어갈때 해야할것
+1. order table에 insert//
+2. sellerorder table에 insert
+3. 장바구니 쿠키 지우기
+
 주문조회 시스템
 판매자회원의 판매목록조회)
- seller ID를 FK로 하는 테이블을 만들어서 주문시 orderid/orderno/sellerid/itemlist/insert
+ seller ID를 FK로 하는 테이블을 만들어서 주문시 orderid/orderno/sellerid/itemlist/insert//
 0. 무통장입금의 경우 admin에서 수동으로 결제완료를 해주어야 함.
 1. 입금대기 | 결제완료->배송준비중->배송출발 | 주문취소
 	입금대기: 무통장입금 한정 status

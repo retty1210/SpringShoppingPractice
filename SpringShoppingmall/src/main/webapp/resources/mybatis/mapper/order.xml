@@ -30,10 +30,7 @@
 		    #{phonenumber},
 		    #{paymethod},
 		    #{price},
-		    CONCAT(
-		        TO_CHAR(FROM_TZ(CAST(SYSDATE AS TIMESTAMP), 'GMT') AT TIME ZONE 'ASIA/SEOUL','YYMMDDHH24MISS'), 
-		        DBMS_RANDOM.STRING('X', 13)
-			),
+		    #{orderno},
 			#{orderstate}
 		)
 	</insert>
@@ -41,17 +38,19 @@
 	<select id="selectOrder" parameterType="order" resultType="order">
 		SELECT * FROM SHOP_ORDER
 		<where>
-			<if test="id != null">
-				ID = #{id},
-			</if>
-			<if test="orderno != null">
-				ORDERNO = #{orderno}
-			</if>
+			<choose>
+				<when test="id != 0">
+					ID = #{id}
+				</when>
+				<when test="orderno != null">
+					ORDERNO = #{orderno}
+				</when>
+			</choose>
 		</where>
 	</select>
 	
 	<select id="selectOrderstats" resultType="orderstat">
-		SELECT * FROM SHOP_ORDERSTAT ORDER BY ID;
+		SELECT * FROM SHOP_ORDERSTAT ORDER BY ID
 	</select>
 	
 	<select id="selectOrderstat" parameterType="order" resultType="orderstat">
@@ -71,4 +70,16 @@
 			ORDERSTATE = #{orderstate}
 			WHERE ID = #{id}
 	</update>
+	
+	<insert id="insertOrderSeller" parameterType="orderSeller">
+		INSERT INTO SHOP_SELLER_ORDER VALUES(
+		    SHOP_SELLER_ORDER_SEQ.NEXTVAL,
+		    #{orderid},
+		    #{sellerid},
+		    #{orderno},
+		    #{itemlist}
+		)
+	</insert>
+	
+	
 </mapper>
