@@ -1,0 +1,5 @@
+user = user1
+password = Database1234
+home-url = C:/Users/retty/git/SpringShoppingPractice/SpringShoppingmall/src/main/resources/oracle/Wallet_testDB
+aws-url = /usr/share/tomcat/webapps/ROOT/WEB-INF/classes/oracle/Wallet_testDB
+DB_URL=jdbc:oracle:thin:@testDB_medium?TNS_ADMIN=C:/Users/retty/git/SpringShoppingPractice/SpringShoppingmall/src/main/resources/oracle/Wallet_testDB

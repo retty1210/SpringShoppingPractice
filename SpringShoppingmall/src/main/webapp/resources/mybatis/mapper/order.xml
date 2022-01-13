@@ -71,7 +71,7 @@
 			WHERE ID = #{id}
 	</update>
 	
-	<insert id="insertOrderSeller" parameterType="orderSeller">
+	<insert id="insertOrderSeller" parameterType="orderseller">
 		INSERT INTO SHOP_SELLER_ORDER VALUES(
 		    SHOP_SELLER_ORDER_SEQ.NEXTVAL,
 		    #{orderid},
@@ -80,6 +80,54 @@
 		    #{itemlist}
 		)
 	</insert>
+	
+	<select id="selectOrderSeller" parameterType="account" resultType="orderseller">
+		SELECT * FROM SHOP_SELLER_ORDER WHERE
+			SELLERID = #{id}
+	</select>
+	
+	<resultMap type="orderseller" id="OrderSellerMap">
+	    <id column="ID" property="id" />
+	    <result column="ORDERID" property="orderid" />
+	    <result column="SELLERID" property="sellerid" />
+	    <result column="ORDERNO" property="orderno" />
+	    <result column="ITEMLIST" property="itemlist" />
+	</resultMap>
+	
+	<resultMap type="order" id="OrderMap">
+	    <id column="ID" property="id" />
+	    <result column="ORDERLIST" property="orderlist" />
+	    <result column="BUYERNAME" property="buyername" />
+	    <result column="PACKAGENAME" property="packagename" />
+	    <result column="ADDRESS" property="address" />
+	    <result column="POSTNUMBER" property="postnumber" />
+	    <result column="PAYMETHOD" property="paymethod" />
+	    <result column="PRICE" property="price" />
+	    <result column="ORDERNO" property="orderno" />
+	    <result column="ORDERSTATE" property="orderstate" />
+		<result column="PACKAGENO" property="packageno" />
+	</resultMap>
+	
+	<resultMap type="orderandseller" id="OrderAndSellerMap">
+	    <collection property="orderseller" resultMap="OrderSellerMap" />
+	    <collection property="order" resultMap="OrderMap" />
+	</resultMap>
+	
+	<select id="selectOrderandsellerbySellerid" parameterType="int" resultMap="OrderAndSellerMap">
+		SELECT 
+		    A.SELLERID,
+		    B.ID,
+		    A.ORDERNO,
+		    A.ITEMLIST,
+		    B.BUYERNAME,
+		    B.PACKAGENAME,
+		    B.ADDRESS,
+		    LPAD(B.POSTNUMBER, 5,'0') AS POSTNUMBER,
+		    LPAD(B.PHONENUMBER, 10, '0') AS PHONENUMBER
+		 FROM SHOP_SELLER_ORDER A, SHOP_ORDER B
+		    WHERE A.ORDERID = B.ID 
+		    AND A.SELLERID = ${value}
+	</select>
 	
 	
 </mapper>

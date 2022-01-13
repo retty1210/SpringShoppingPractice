@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${sessionScope.username } 님의 판매자용 주문목록</title>
+<title>주문 상세보기</title>
 <jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 </head>
 <body>
@@ -18,23 +18,39 @@
 		<section>
 			<table border="1">
 				<tr>
-					<td>주문ID</td>
 					<td>주문번호</td>
-					<td>itemlist</td>
-					<td>구매자</td>
+					<td>${data.getOrderno() }
+				</tr>
+				<tr>
+					<td>구매자 아이디</td>
+					<td>${data.getBuyername() }
+				</tr>
+				<tr>
+					<td>구매자 이름</td>
+					<td>${data.getPackagename() }
+				</tr>
+				<tr>
+					<td>구매자 주소</td>
+					<td>${data.getAddress() }
+				</tr>
+				
+			</table>
+			<table border="1">
+				<tr>
+					<td>물건 ID</td>
+					<td>물건 이름</td>
+					<td>판매자</td>
+					<td>가격</td>
 				</tr>
 				
 				<c:forEach var="data" items="${datas }">
-				
 					<tr>
-						<td>${data.order.getId() }</td>
-						<c:url var="orderdetailURL" value="/orders/detail?id=${data.order.getId() }" />
-						<td><a href="${orderdetailURL }">${data.orderseller.getOrderno() }</a></td>
-						<td>${data.orderseller.getItemlist() }</td>
-						<td>${data.order.getBuyername() }</td>
+						<td>${data.getId() }</td>
+						<td>${data.getItemname() }</td>
+						<td>${data.getSellername() }</td>
+						<td>${data.getPrice() }</td>
 					</tr>
 				</c:forEach>
-				
 			</table>
 		</section>
 	</main>

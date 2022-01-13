@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shoppingmall.web.account.AccountDAO;
+import com.shoppingmall.web.account.AccountVO;
 import com.shoppingmall.web.common.CommonTools;
 import com.shoppingmall.web.item.model.*;
 
@@ -17,6 +19,9 @@ public class OrderService {
 	
 	@Autowired
 	private ItemService iservice;
+	
+	@Autowired
+	private AccountDAO accdao;
 	private CommonTools ct;
 	
 	public int getPriceAll(List<ItemVO> ilist) {
@@ -110,6 +115,34 @@ public class OrderService {
 		return res;
 	}
 	
+	public List<OrderAndSellerVO> selectOrderSeller(AccountVO vo) {
+		List<OrderAndSellerVO> datas = dao.selectOrderSeller(vo);
+		return datas;
+	}
+	
+	public List<OrderAndSellerVO> selectOrderSeller(String username) {
+		AccountVO vo = accdao.checkUsernameString(username);
+		List<OrderAndSellerVO> datas = dao.selectOrderSeller(vo);
+		return datas;
+	}
+	
+	public OrderVO selectOrder(OrderSellerVO vo) {
+		int id = vo.getOrderid();
+		OrderVO data = dao.selectOrder(id);
+		return data;
+	}
+	
+	public OrderVO selectOrder(OrderVO vo) {
+		OrderVO data = dao.selectOrder(vo);
+		return data;
+	}
+	
+	public List<ItemVO> getItemlist(String slist) {
+		int[] ilist = ct.makeIntList(slist);
+		List<ItemVO> datas = iservice.viewCart(ilist);
+		return datas;
+	}
+ 	
 	
 
 }

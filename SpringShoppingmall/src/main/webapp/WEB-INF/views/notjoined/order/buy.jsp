@@ -25,9 +25,17 @@
 	                var extraAddr = ''; // 참고항목 변수
 
 	                //어떤 주소 타입을 선택하든 도로명 주소로 나오게 한다.
-	                
+	                //if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                //    addr = data.roadAddress;
+	                //} else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                //    addr = data.jibunAddress;
+	                //}
 	                addr = data.roadAddress;
 
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                //if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
 	                        extraAddr += data.bname;
 	                    }
@@ -39,13 +47,18 @@
 	                    if(extraAddr !== ''){
 	                        extraAddr = ' (' + extraAddr + ')';
 	                    }
-	                   
-	                adr += extraAddr;
-	               
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("address3").value = extraAddr;
+	                
+	                //} else {
+	                //    document.getElementById("address3").value = '';
+	                //}
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                document.getElementById('postnumber').value = data.zonecode;
-	                document.getElementById("address").value = addr;
-	                // 커서를 주소 필드로 이동한다.
-	                document.getElementById("address").focus();
+	                document.getElementById("address1").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("address2").focus();
 
 	            }
 	        }).open();
@@ -105,22 +118,52 @@
 					<div>
 						<p>주문자 정보 입력</p>
 						<div>
-							<input type="text" name="packagename" id="packagename">
 							<label for="packagename">이름</label>
+							<input type="text" name="packagename" id="packagename">
+							
 						</div>
 						<div>
-							<input type="text" name="address" id="address">
-							<label for="address1">주소</label>
+							<label for="address1">기본주소</label>
+							<input type="text" name="address1" id="address1" readonly>
 						</div>
 						<div>
-							<input type="text" name="postnumber" id="postnumber" readonly>
-							<label for="postnumber">우편번호</label>
+							<label for="address2">상세주소</label>
+							<input type="text" name="address2" id="address2">
 						</div>
 						<div>
-							<input type="text" name="phonenumber" id="phonenumber">
-							<label for="phonenumber">전화번호</label>
+							<label for="address3">추가주소</label>
+							<input type="text" name="address3" id="address3" readonly>
 						</div>
 						
+						<div>
+							<label for="postnumber">우편번호</label>
+							<input type="number" name="postnumber" id="postnumber" readonly>
+							<button type="button" onclick="DaumPostcodeScroll()">우편번호 찾기</button>
+						</div>
+						<div>
+							<label for="phonenumber">전화번호</label>
+							<input type="number" name="phonenumber" id="phonenumber">
+						</div>
+						<div>
+							<button type="button" onclick="FinalAddr()">주소 최종확인</button>
+							<label for="address">최종주소</label>
+							<input type="text" name="address" id="address" readonly>
+							<p>비회원주문의 경우 주문번호로만 주문확인이 가능하며 주소변경이 어렵습니다. 반드시 잘 확인해주세요.</p>
+							<script type="text/javascript">
+								function FinalAddr() {
+									var address1 = document.getElementById('address1').value;
+									var address2 = document.getElementById('address2').value;
+									var address3 = document.getElementById('address3').value;
+									var addr = '';
+									addr += address1;
+									addr += ' ';
+									addr += address2;
+									addr += ' ';
+									addr += address3;
+									document.getElementById('address').value = addr;
+								}
+							</script>
+						</div>
 					</div>
 					<div>
 						<label><input type="checkbox" name="rulecheck" id="rulecheck" value="rulecheck">정보통신법.....구매에 동의하십니까?</label>
@@ -132,8 +175,9 @@
 						<label for="card">카드결제</label>
 					</div>
 					<div>
-						<input type="hidden" name="orderlist" value="${res }">
+						<input type="hidden" name="orderlist" value="${sessionScope.ordervo.getOrderlist()}">
 						<input type="hidden" name="price" value="${payPrice}">
+						
 					</div>
 					<div>
 						<button type="submit">결제하기</button>

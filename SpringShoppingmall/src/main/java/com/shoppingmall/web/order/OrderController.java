@@ -14,13 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.shoppingmall.web.account.AccountController;
-import com.shoppingmall.web.account.AccountVO;
+import com.shoppingmall.web.account.*;
 import com.shoppingmall.web.common.CommonTools;
-import com.shoppingmall.web.item.model.ItemService;
-import com.shoppingmall.web.item.model.ItemVO;
-import com.shoppingmall.web.order.model.OrderService;
-import com.shoppingmall.web.order.model.OrderVO;
+import com.shoppingmall.web.item.model.*;
+import com.shoppingmall.web.order.model.*;
 
 @Controller
 public class OrderController {
@@ -35,10 +32,6 @@ public class OrderController {
 	@Autowired
 	private ItemService iservice;
 	
-	@RequestMapping(value="/orders", method = RequestMethod.GET)
-	public String orderlist(OrderVO vo) {
-		return "order/list";
-	}
 	
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	public String itemlist(OrderVO vo, HttpServletRequest request, HttpSession session) {
@@ -56,12 +49,6 @@ public class OrderController {
 		List<ItemVO> data = iservice.viewCart(ilist);
 		session.setAttribute("datas", data);
 		
-		System.out.println("orderlist: " + vo.getOrderlist());
-		System.out.println("buyername: " + vo.getBuyername());
-		System.out.println("packagename: " + vo.getPackagename());
-		System.out.println("address: " + vo.getAddress());
-		System.out.println("postnumber: " + vo.getPostnumber());
-		System.out.println("phonenumber: " + vo.getPhonenumber());
 		session.setAttribute("ordervo", vo);
 		return "order/buy";
 	}
@@ -130,5 +117,50 @@ public class OrderController {
 			session.setAttribute("error_msg", "결제수단 선택 과정에서 오류가 발생했습니다.");
 			return "order/fail";
 		}
+	}
+	
+	@RequestMapping(value="/orders", method = RequestMethod.GET)
+	public String orders(OrderVO vo, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+		String usertype = "";
+		String username = "";
+		if(session.getAttribute("usertype") != null) {
+			usertype = session.getAttribute("usertype").toString();
+			username = session.getAttribute("username").toString();
+		}
+		
+		if(usertype.equals("seller")) {
+			System.out.println("seller");
+			List<OrderAndSellerVO> datas = service.selectOrderSeller(username);
+			session.setAttribute("datas", datas);
+		} else if(usertype.equals("buyer")) {
+			System.out.println("buyer");
+		} else if(usertype.equals("admin")) {
+			System.out.println("admin");
+		} else {
+			System.out.println("notjoined");
+		}
+		
+		return "order/list";
+	}
+	
+	@RequestMapping(value="/orders/detail", method = RequestMethod.GET)
+	public String orderdetail(OrderVO vo, HttpSession session) {
+		OrderVO data = service.selectOrder(vo);
+		String slist = data.getOrderlist();
+		List<ItemVO> datas = service.getItemlist(slist);
+		
+		session.setAttribute("data", data);
+		session.setAttribute("datas", datas);
+		return "order/detail";
+	}
+	
+	@RequestMapping(value="/notloginorder", method = RequestMethod.POST)
+	public String notLoginOrderlist(OrderVO vo, HttpSession session) {
+		OrderVO data = service.selectOrder(vo);
+		String slist = data.getOrderlist();
+		List<ItemVO> datas = service.getItemlist(slist);
+		session.setAttribute("data", data);
+		session.setAttribute("datas", datas);
+		return "order/detail";
 	}
 }

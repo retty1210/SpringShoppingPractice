@@ -13,8 +13,8 @@ http://localhost/login?next=/info ->로그인에 성공하면 /info로 URL주소
 220111추가) 기성제품이 아니라 핸드메이드제품 공동창고인거임 그래서 1item 1sell 체제로..수량이없는....ㅋㅋㅋㅋㅋ핸드메이드면 생산량이 작아서 공동창고도 할만함 아무튼 그럼ㄹㅇㅋㅋ
 
 220112 제작완료한것)order오류잡고 작동 테스트, sellerorder table 관련기능
-220113 할것)장바구니 쿠키 지우기, seller order list띄우기, buyer order list 띄우기
-시간남으면 할것)회원등급별 topnavi 리스트 조정, 비회원 주문목록 search기능, itemlist interceptor
+220113 할것)seller order list띄우기//, 주문상세페이지//, 비회원 주문목록 search기능//, itemlist interceptor(admin)//
+시간남으면 할것)회원등급별 topnavi 리스트 조정,  buyer order list 띄우기, 장바구니 쿠키 지우기, 주문목록 admin용 전체주문리스트, main에 관리자용메뉴(회원전체목록, 다른admin추가), seller 카트/위시리스트못보게, seller 상품리스트에서 자기상품에 삭제뜨게, 비회원 위시리스트 못보게
 
 
 결제시스템
@@ -42,6 +42,8 @@ http://localhost/login?next=/info ->로그인에 성공하면 /info로 URL주소
 	배송준비중: 창고에 주문정보 넘어감.
 	배송출발: 창고에서 송장 등록함.
 	주문취소
+추가로 판매자전용)미지급: 송장은 떴으나 금액이 판매자에게는 안들어옴
+지급완료: 판매자에게 정산완료
 	
 회원등급별 페이지 차별점
 admin: 	itemlist에서 삭제 버튼이 일괄적으로 다 뜸.
@@ -52,7 +54,7 @@ admin: 	itemlist에서 삭제 버튼이 일괄적으로 다 뜸.
 seller:	itemlist에서 자기가 올린 글에는 삭제 버튼이 뜸.
 	wishlist에서 자기가 올린 상품 목록과 wishlist로 정해진 수<-이거 구현 안될거같아 그냥 못보게...
 	cart 못봄
-	orders에서 자기가 받은 주문내역이 뜸(프린트 버튼 존재, 이번달의 매출도 볼수있으면 좋을듯)
+	orders에서 자기가 받은 주문내역이 뜸(이번달의 매출도 볼수있으면 좋을듯)
 	
 buyer:	itemlist에서 장바구니 담기, 위시리스트 담기 가능
 	cart, wishlist 사용가능

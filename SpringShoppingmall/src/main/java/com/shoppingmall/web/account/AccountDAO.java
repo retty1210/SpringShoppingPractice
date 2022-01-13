@@ -34,5 +34,10 @@ public class AccountDAO {
 		AccountVO data = this.sess.selectOne("AccountMapper.checkEmail", vo);
 		return data == null ? true : false;
 	}
+	
+	public AccountVO checkUsernameString(String username) {
+		AccountVO data = this.sess.selectOne("AccountMapper.checkUsernameString", username);
+		return data;
+	}
 
 }

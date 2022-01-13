@@ -35,7 +35,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<!-- 외부 구성 파일 로드 -->
-	<context:property-placeholder location="file:///C:/Users/retty/oracle_connection2.prop" />
+	<context:property-placeholder location="classpath:/oracle/oracle_connection2.prop" />
 	
 	<!-- 데이터 베이스 연결을 위한 구성정보를 가지는 DataSource 객체 생성 -->
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -71,14 +71,28 @@
 	
 	
 	
-	<!-- Interceptor 
+	<!-- 예시: 이거 주석 풀지말것!!!참고용으로 내버려두자
 	<interceptors>
 		<interceptor>
 			<mapping path="/board/*" />
 			<exclude-mapping path="/board/detail" />
 			<beans:bean class="com.web.home.interceptor.LoginCheckInterceptor"></beans:bean>
 		</interceptor>
-	</interceptors> -->
+	 -->
+	
+	<!-- Interceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/orders" />
+			<mapping path="/buy" />
+			<mapping path="/payment" />
+			<beans:bean class="com.shoppingmall.web.interceptor.OrdersInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/itemlist" />
+			<beans:bean class="com.shoppingmall.web.interceptor.ItemlistInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 	<!-- Weaving at Runtime -->
 	<aop:aspectj-autoproxy />

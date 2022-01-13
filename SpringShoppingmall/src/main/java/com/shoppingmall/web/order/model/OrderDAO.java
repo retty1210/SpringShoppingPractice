@@ -44,6 +44,13 @@ public class OrderDAO {
 		return data;
 	}
 	
+	public OrderVO selectOrder(String orderno) {
+		OrderVO vo = new OrderVO();
+		vo.setOrderno(orderno);
+		OrderVO data = this.sess.selectOne("OrderMapper.selectOrder", vo);
+		return data;
+	}
+	
 	public List<OrderstatVO> selectOrderstats() {
 		List<OrderstatVO> datas = this.sess.selectList("OrderMapper.selectOrderstats");
 		return datas;
@@ -95,5 +102,16 @@ public class OrderDAO {
 		return data.getId();
 	}
 	
+	public List<OrderAndSellerVO> selectOrderSeller(AccountVO vo) {
+		int id = vo.getId();
+		List<OrderAndSellerVO> datas = this.sess.selectList("OrderMapper.selectOrderandsellerbySellerid", id);
+		return datas;
+	}
+	
+	public List<OrderAndSellerVO> selectOrderSeller(int id) {
+		List<OrderAndSellerVO> datas = this.sess.selectList("OrderMapper.selectOrderandsellerbySellerid", id);
+		return datas;
+	}
+	 
 	
 }

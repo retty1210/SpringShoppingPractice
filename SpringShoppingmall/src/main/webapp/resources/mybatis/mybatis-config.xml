@@ -12,6 +12,7 @@
 	<typeAlias type="com.shoppingmall.web.order.model.OrderVO" alias="order" />
 	<typeAlias type="com.shoppingmall.web.order.model.OrderstatVO" alias="orderstat" />
 	<typeAlias type="com.shoppingmall.web.order.model.OrderSellerVO" alias="orderseller" />
+	<typeAlias type="com.shoppingmall.web.order.model.OrderAndSellerVO" alias="orderandseller" />
 	<typeAlias type="com.shoppingmall.web.permission.model.PermissionVO" alias="permission" />
   </typeAliases>
   
