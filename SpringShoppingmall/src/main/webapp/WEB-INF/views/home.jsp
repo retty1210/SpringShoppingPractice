@@ -9,7 +9,21 @@
 	<jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 </head>
 <body>
-	
+	<script type="text/javascript">
+		window.onload = function() {
+			<% 
+			if(session.getAttribute("error") != null) {
+			%>
+				var error = '<%=(boolean)session.getAttribute("error") %>';
+				if(error) {
+					var error_msg = '<%=(String)session.getAttribute("error_msg") %>';
+					alert(error_msg);
+				}
+			<%
+			}
+			%>
+		}
+	</script>
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_navi.jsp" flush="false" />
 	</header>

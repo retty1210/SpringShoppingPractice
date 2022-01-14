@@ -74,6 +74,13 @@ public class OrderService {
 		}
 	}
 	
+	public boolean updateOrderstat(int orderstate, int id) {
+		OrderVO vo = new OrderVO();
+		vo.setId(id);
+		vo.setOrderstate(orderstate);
+		return dao.updateOrderstat(vo);
+	}
+	
 	public boolean insertSellectOrder(OrderVO vo) {
 		boolean res = false;
 		//1. ordervo의 orderlist에서 int[]값 추출
@@ -140,6 +147,16 @@ public class OrderService {
 	public List<ItemVO> getItemlist(String slist) {
 		int[] ilist = ct.makeIntList(slist);
 		List<ItemVO> datas = iservice.viewCart(ilist);
+		return datas;
+	}
+	
+	public List<OrderVO> selectOrderBuyer(String username) {
+		List<OrderVO> datas = dao.selectOrderBuyer(username);
+		return datas;
+	}
+	
+	public List<OrderVO> selectOrderAdmin() {
+		List<OrderVO> datas = dao.selectOrderAdmin();
 		return datas;
 	}
  	

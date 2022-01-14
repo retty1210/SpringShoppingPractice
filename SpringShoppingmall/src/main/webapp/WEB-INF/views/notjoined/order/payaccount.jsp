@@ -36,6 +36,8 @@
 				</tr>
 			</table>
 			<ul>
+			<c:url var="orderURL" value="/orders" /> 
+			<c:url var="homeURL" value="/" /> 
 				<li><a href="${orderURL }">주문 목록으로 가기</a></li>
 				<li><a href="${homeURL }">메인 페이지로 가기</a>
 			</ul>

@@ -51,6 +51,18 @@ public class OrderDAO {
 		return data;
 	}
 	
+	public List<OrderVO> selectOrderBuyer(String username) {
+		OrderVO vo = new OrderVO();
+		vo.setBuyername(username);
+		List<OrderVO> datas = this.sess.selectList("OrderMapper.selectOrderBuyer", vo);
+		return datas;
+	}
+	
+	public List<OrderVO> selectOrderAdmin() {
+		List<OrderVO> datas = this.sess.selectList("OrderMapper.selectOrderAdmin");
+		return datas;
+	}
+	
 	public List<OrderstatVO> selectOrderstats() {
 		List<OrderstatVO> datas = this.sess.selectList("OrderMapper.selectOrderstats");
 		return datas;

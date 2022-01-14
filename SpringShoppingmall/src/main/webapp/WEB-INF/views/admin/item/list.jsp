@@ -11,6 +11,8 @@
 <jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 <c:url var="jscart" value="/static/js/cart.js" />
 <script type="text/javascript" src=${jscart } ></script>
+<c:url var="jsadminitem" value="/static/js/adminitemlist.js" />
+<script type="text/javascript" src=${jsadminitem } ></script>
 </head>
 <body>
 	<header>
@@ -18,6 +20,12 @@
 	</header>
 	<main role="main">
 		<section>
+		<form action="./deleteitem" method="post">
+			<div>
+				<button type="button" name="openb" onclick="opencheck();">삭제할 아이템 체크하기</button>
+				<button type="button" name="closeb" onclick="closecheck();">돌아가기</button>
+				<button type="button" name="deleteb" onclick="deletecheckall();">한꺼번에 삭제하기</button>
+			</div>
 			<table border="1">
 				<tr>
 					<td>ID</td>
@@ -29,6 +37,7 @@
 					<td>카테고리</td>
 					
 					<td>삭제(관리자용 메뉴)</td>
+					<td name="hidden">삭제(hidden)</td>
 				</tr>
 				
 				<c:forEach var="data" items="${datas}">
@@ -69,38 +78,13 @@
 								}
 							</script>
 						</td>
+						<td name="hidden"><input type="checkbox" name="deletecheck" value="${data.getId() }"></td>
 					</tr>
 				</c:forEach>
 			</table>
+			</form>
 		</section>
-		<div>
-			<c:url var="addURL" value="/itemlist/add" />
-			<a href="${addURL}">업로드</a>
-		</div>
-		<div class="album py-5 bg-light">
-		    <div class="container">
 		
-		      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-		        <div class="col">
-		          <div class="card shadow-sm">
-		            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-		
-		            <div class="card-body">
-		              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		              <div class="d-flex justify-content-between align-items-center">
-		                <div class="btn-group">
-		                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-		                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-		                </div>
-		                <small class="text-muted">9 mins</small>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		        
-		      </div>
-		    </div>
-		</div>
 	</main>
 </body>
 </html>

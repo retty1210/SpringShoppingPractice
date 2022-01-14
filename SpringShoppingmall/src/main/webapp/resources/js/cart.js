@@ -53,6 +53,7 @@ function addcart(id) {
 }
 
 function deleteCart() {
-	document.cookie = "cart=;path=/shop";
+	document.cookie = "cart=;path=/";
 	alert("장바구니의 모든 상품이 삭제되었습니다.");
+	location.reload();
 }

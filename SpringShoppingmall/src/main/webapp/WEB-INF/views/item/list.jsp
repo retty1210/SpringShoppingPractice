@@ -42,7 +42,7 @@
 						</td>
 						<td>
 							<c:if test="${data.getThumURL() != null}">
-								<a href="${detailURL}">${data.getThumURL()}</a>
+								<a href="${detailURL}"><img style="height=300; width=300" src="${data.getThumURL()}"></a>
 							</c:if>
 						</td>
 						<td>${data.getPrice() }</td>

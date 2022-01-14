@@ -11,6 +11,11 @@
 <jsp:include page="/WEB-INF/views/module/default.jsp" flush="false" />
 </head>
 <body>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.cookie = "cart=;path=/";
+		}
+	</script>
 	<header>
 		<jsp:include page="/WEB-INF/views/module/top_navi.jsp" flush="false" />
 	</header>

@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shoppingmall.web.account.*;
 import com.shoppingmall.web.common.CommonTools;
@@ -128,14 +131,19 @@ public class OrderController {
 			username = session.getAttribute("username").toString();
 		}
 		
+		List<OrderstatVO> orderstats = service.orderstats();
+		session.setAttribute("orderstats", orderstats);
+		
 		if(usertype.equals("seller")) {
 			System.out.println("seller");
 			List<OrderAndSellerVO> datas = service.selectOrderSeller(username);
 			session.setAttribute("datas", datas);
 		} else if(usertype.equals("buyer")) {
-			System.out.println("buyer");
+			List<OrderVO> datas = service.selectOrderBuyer(username);
+			session.setAttribute("datas", datas);
 		} else if(usertype.equals("admin")) {
-			System.out.println("admin");
+			List<OrderVO> datas = service.selectOrderAdmin();
+			session.setAttribute("datas", datas);
 		} else {
 			System.out.println("notjoined");
 		}
@@ -162,5 +170,21 @@ public class OrderController {
 		session.setAttribute("data", data);
 		session.setAttribute("datas", datas);
 		return "order/detail";
+	}
+	
+	@RequestMapping(value="/changeorderstat", method = RequestMethod.POST, produces="application/json; charset=utf-8")
+	@ResponseBody
+	public String changeOrderstat(@RequestParam(value="selectstat") int userstat, 
+			@RequestParam(value="id") int orderid,
+			@RequestParam(value="orgstat") int orgstat) {
+		System.out.println("주문id: " + orderid + " | 선택단계: " + userstat);
+		boolean res = service.updateOrderstat(userstat, orderid);
+		JSONObject json = new JSONObject();
+		if(res) {
+			json.put("selectstat", userstat);
+		} else {
+			json.put("selectstat", orgstat);
+		}
+		return json.toJSONString();
 	}
 }

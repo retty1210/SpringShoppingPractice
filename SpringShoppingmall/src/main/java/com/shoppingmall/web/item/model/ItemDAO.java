@@ -60,7 +60,10 @@ public class ItemDAO {
 		return res == 1 ? true : false;
 	}
 
-	
+	public boolean deleteItemCheck(int[] ilist) {
+		int res = this.sess.delete("ItemMapper.deleteItemCheck", ilist);
+		return res >= 1 ? true : false;
+	}
 	
 
 }

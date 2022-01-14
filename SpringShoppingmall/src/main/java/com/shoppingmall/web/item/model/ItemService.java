@@ -94,5 +94,9 @@ public class ItemService {
 		}
 		return res;
 	}
+	
+	public boolean deleteItemCheck(int[] ilist) {
+		return dao.deleteItemCheck(ilist);
+	}
 
 }

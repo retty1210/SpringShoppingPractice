@@ -49,6 +49,14 @@
 		</where>
 	</select>
 	
+	<select id="selectOrderBuyer" parameterType="order" resultType="order">
+		SELECT * FROM SHOP_ORDER WHERE BUYERNAME = #{buyername}
+	</select>
+	
+	<select id="selectOrderAdmin" resultType="order">
+		SELECT * FROM SHOP_ORDER ORDER BY ID
+	</select>
+	
 	<select id="selectOrderstats" resultType="orderstat">
 		SELECT * FROM SHOP_ORDERSTAT ORDER BY ID
 	</select>

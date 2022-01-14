@@ -84,13 +84,24 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/orders" />
+			<beans:bean class="com.shoppingmall.web.interceptor.OrdersInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
 			<mapping path="/buy" />
 			<mapping path="/payment" />
-			<beans:bean class="com.shoppingmall.web.interceptor.OrdersInterceptor"></beans:bean>
+			<beans:bean class="com.shoppingmall.web.interceptor.PaymentInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>
 			<mapping path="/itemlist" />
 			<beans:bean class="com.shoppingmall.web.interceptor.ItemlistInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/wishlist" />
+			<beans:bean class="com.shoppingmall.web.interceptor.WishlistInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/cart" />
+			<beans:bean class="com.shoppingmall.web.interceptor.CartInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
 	

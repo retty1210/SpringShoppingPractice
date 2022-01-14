@@ -14,7 +14,8 @@ http://localhost/login?next=/info ->로그인에 성공하면 /info로 URL주소
 
 220112 제작완료한것)order오류잡고 작동 테스트, sellerorder table 관련기능
 220113 할것)seller order list띄우기//, 주문상세페이지//, 비회원 주문목록 search기능//, itemlist interceptor(admin)//
-시간남으면 할것)회원등급별 topnavi 리스트 조정,  buyer order list 띄우기, 장바구니 쿠키 지우기, 주문목록 admin용 전체주문리스트, main에 관리자용메뉴(회원전체목록, 다른admin추가), seller 카트/위시리스트못보게, seller 상품리스트에서 자기상품에 삭제뜨게, 비회원 위시리스트 못보게
+220114 할것) 회원등급별 topnavi 리스트 조정//,  buyer order list 띄우기//, 주문목록 admin용 전체주문리스트//, buyer말고는 위시리스트 못보게//, seller /admin카트못보게//, home에 error msg alert로 띄우기//, 장바구니 쿠키 지우기//, 주문단계 수정가능하게(리스트 불러와서 띄우게)//
+220114 이후 시간나면 할것)관리자용메뉴(회원전체목록, 다른admin추가), seller 상품리스트에서 자기상품에 삭제뜨게, notjoined itemlist interceptor, category table 만들고 category별로 아이템 볼 수 있게(메뉴까지 만들기), 검색기능 활성화하던가 상단바에서 지우던가, 가입유효성검사, 이미지 왜 안뜨는지 이유 알아보기
 
 
 결제시스템
@@ -29,8 +30,8 @@ http://localhost/login?next=/info ->로그인에 성공하면 /info로 URL주소
 
 * order들어갈때 해야할것
 1. order table에 insert//
-2. sellerorder table에 insert
-3. 장바구니 쿠키 지우기
+2. sellerorder table에 insert//
+3. 장바구니 쿠키 지우기//
 
 주문조회 시스템
 판매자회원의 판매목록조회)

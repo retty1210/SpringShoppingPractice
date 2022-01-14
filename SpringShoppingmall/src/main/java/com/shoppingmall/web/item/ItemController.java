@@ -32,6 +32,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.shoppingmall.web.account.AccountController;
 import com.shoppingmall.web.account.AccountVO;
+import com.shoppingmall.web.common.CommonTools;
 import com.shoppingmall.web.item.model.*;
 
 @Controller
@@ -41,6 +42,8 @@ public class ItemController {
 
 	@Autowired
 	private ItemService service;
+	
+	private CommonTools ct;
 //	
 //	@Resource(name = "uploadPath")
 //	private String uploadPath;
@@ -107,6 +110,7 @@ public class ItemController {
 			}
 			
 			data.setThumURL(uuidname);
+			data.setInfoURL(uuidname);
 		}
 		
 		boolean res = service.upload(data);
@@ -241,6 +245,29 @@ public class ItemController {
 		
 		
 		return "item/wish";
+	}
+	
+	@RequestMapping(value="/deleteitem", method=RequestMethod.POST, produces="application/json; charset=utf-8")
+	@ResponseBody
+	public String deleteCheck(@RequestParam(value="arr")String arr) {
+		JSONObject json = new JSONObject();
+		
+		if(ct.isEmpty(arr)) {
+			json.put("msg", "선택된 아이템이 없습니다");
+		} else {
+			int[]iarr = ct.makeIntList(arr);
+			boolean res = service.deleteItemCheck(iarr);
+			System.out.println("res : " + res);
+			int len = iarr.length;
+			System.out.println("삭제아이템개수: " + len);
+			if(res) {
+				json.put("msg", "아이템의 삭제에 성공하였습니다");
+			} 
+			//삭제아이템이 1개일때: 메시지가 잘 뜸
+			//삭제아이템이 2개 이상일 때: res는 true임에도 메시지가 안 뜸
+		}
+		
+		return json.toJSONString();
 	}
 	
 

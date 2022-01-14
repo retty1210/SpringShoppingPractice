@@ -12,6 +12,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.shoppingmall.web.item.model.ItemVO;
 
 public class CommonTools {
@@ -146,4 +149,56 @@ public class CommonTools {
 		return res;
 	}
 	
+	public static String getUsertype(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String usertype = "";
+		if(session.getAttribute("usertype") != null) {
+			usertype = session.getAttribute("usertype").toString();
+		}
+		return usertype;
+	}
+	
+	public static boolean checkIntlistNull(int[] ilist) {
+		boolean res = true;
+		int count = ilist.length;
+		if(count == 0) {
+			res = false;
+		}
+		for(int i: ilist) {
+			if(i == 0 || isEmpty(i)) {
+				res = false;
+				break;
+			} 
+		}
+		
+		return res;
+	}
+	
+	public static int[] makeIntlisttrue(int[] ilist) {
+		if(ilist.length == 0) {
+			int[] newl = {-1};
+			return newl;
+		} else {
+			int count = ilist.length;
+			for(int i : ilist) {
+				if(i == 0 || isEmpty(i)) {
+					count = count - 1;
+				}
+			}
+			int[] newl = new int[count];
+			int j = 0;
+			for(int i = 0; i < ilist.length; i++) {
+				if(ilist[i] != 0) {
+					newl[j] = ilist[i];
+					j++;
+				}
+			}
+			if(newl[0] != 0) {
+				return newl;
+			} else {
+				int[] n = {-1};
+				return n;
+			}
+		}
+	}
 }
