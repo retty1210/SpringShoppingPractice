@@ -92,3 +92,6 @@ local.properties
 
 #Wallet
 oracle/
+
+#image
+upload/
